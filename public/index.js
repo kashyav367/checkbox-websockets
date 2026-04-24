@@ -10,10 +10,8 @@ const handleClick = (e) => {
 socket.on("io:conn", (checkboxes, users) => {
     console.log("new socket connected");
 
-    document.getElementById("users").innerText = users;
-
-    const grid = document.getElementById("checkbox-grid");
-    grid.innerHTML = "";
+    const userBox = document.getElementById("users");
+    userBox.innerText = users;
 
     checkboxes.forEach((_, i) => {
         const box = document.createElement("input");
@@ -23,18 +21,21 @@ socket.on("io:conn", (checkboxes, users) => {
         box.onclick = handleClick;
         box.checked = checkboxes[i];
 
-        grid.appendChild(box);
-    });
-});
+        document.getElementById("checkbox-grid").appendChild(box);
+    })
+})
 
 socket.on("socket:checked", (id) => {
-    document.getElementById(id).checked = true;
-});
+    const box = document.getElementById(id);
+    box.checked = true;
+})
 
 socket.on("socket:unchecked", (id) => {
-    document.getElementById(id).unchecked = false;
-});
+    const box = document.getElementById(id);
+    box.checked = false;
+})
 
 socket.on("io:diss", (users) => {
-    document.getElementById("users").innerText = users;
-});
+    const userBox = document.getElementById("users");
+    userBox.innerText = users;
+})
