@@ -1,4 +1,6 @@
-const socket = io();
+const socket = io("https://checkbox-app.onrender.com", {
+  transports: ["websocket"]
+});
 
 const handleClick = (e) => {
     const { checked, id } = e.target;
